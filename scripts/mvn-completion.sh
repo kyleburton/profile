@@ -16,7 +16,7 @@ _m2_complete()
 
   COMPREPLY=()
   cur=${COMP_WORDS[COMP_CWORD]}
-  goals='clean compile test install package deploy site genrate-sources'
+  goals='clean compile test install package deploy site generate-sources'
   goals=$goals _m2_make_goals "eclipse" "eclipse"
   goals=$goals _m2_make_goals "idea" "idea"
   goals=$goals _m2_make_goals "assembly" "assembly"
