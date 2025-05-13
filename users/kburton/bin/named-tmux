@@ -16,8 +16,11 @@ function _compute_tmux_name_for_pwd () {
 }
 
 function _is_active_tmux_name () {
-  local name="$1"
-  tmux -L "$name" list-sessions | grep -q "$name:"
+  # NB: sname is used as both the socket name and the session name
+  local sname="$1"
+  # tmux -L "$sname" list-sessions | grep -q "$sname:"
+  # tmux -L "$sname" info >/dev/null 2>&1
+  tmux -L "$sname" has-session -t "$sname" >/dev/null 2>&1
 }
 
 function _create_or_attach () {

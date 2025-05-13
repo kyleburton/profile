@@ -12,16 +12,25 @@ cmd-jump () {
 }
 
 cmd-pushb () {
-  local newb flags
+  local currb newb flags
+
   flags=""
   while [[ "${1:-}" == -c ]]; do
     flags="-c"
     shift
   done
+
+  currb="$(git rev-parse --abbrev-ref HEAD)"
+  if ! grep -q "^${currb}$" $branches_file; then
+    echo "$currb" >> "$branches_file"
+  fi
+
   newb="${1:-}"
-  git rev-parse --abbrev-ref HEAD >> "$branches_file"
   if [[ -n "$newb" ]]; then
+    shift
     git switch $flags "$newb"
+  else
+    echo "pushb: you must pass a branch name to switch to"
   fi
 }
 
