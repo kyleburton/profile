@@ -1,10 +1,10 @@
+# various backup and IDE/editor state files
 *.swp
-out.txt
 .stats/
-all.files
-krb.README
-README.krb
 *~
+\#*
+.#*
+# files and dirs used by Kyle's shell tooling
 .local-screen/
 .tmux.conf
 # state file for krb.git shell helper
@@ -12,6 +12,20 @@ README.krb
 .krb.branches.bak
 # silver searcher / ag ignore file
 .ignore
-# a sentinel file I use for coordinating build activities between shells
+# a sentinel file I use for coordinating build activities between shells for Matchmaking projects
 .services-restarted
 .named-tmux
+# these are "Kyle" files and temp files
+out.txt
+krb.notes
+x.json
+y.json
+z.json
+xx.json
+all.files
+krb.README
+README.krb
+krb*.sh
+krb*.txt
+# these are temp files created by some of the Matchmaking team's tooling
+*-riot.matchmaking.skill.*.schema
