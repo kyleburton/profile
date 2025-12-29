@@ -4,4 +4,25 @@ count="${1:-32}"
 nbytes="$(( 2 * $count ))"
 # dd if=/dev/urandom bs=1 count=$count 2>/dev/null | ruby -e 'x=$stdin.read; puts [x[0..x.size]].pack("u").downcase' | tr -d \\n | cut -b2-
 # dd if=/dev/urandom bs=1 count=$count 2>/dev/null | hexdump -v -e '1/1 "%02x"'
-dd if=/dev/urandom bs=1 count=$nbytes 2>/dev/null | base64 | tr -d '=/+' | cut -b "1-$count"
+# dd if=/dev/urandom bs=1 count=$nbytes 2>/dev/null | base64 | tr -d '=/+' | cut -b "1-$count"
+
+perl <<'END'
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+# Seed the random number generator
+srand;
+
+# Define the range of printable ASCII characters (ASCII 32 to 126)
+my $min_ascii = 32; # Space character
+my $max_ascii = 126; # Tilde character
+
+# Generate and print 32 random characters
+for (my $i = 0; $i < 32; $i++) {
+    my $random_ascii_code = int(rand($max_ascii - $min_ascii + 1)) + $min_ascii;
+    print chr($random_ascii_code);
+}
+
+print "\n"; # Add a newline at the end
+END
